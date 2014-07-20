@@ -8,6 +8,7 @@ var jshint     = require('gulp-jshint');
 var sass       = require('gulp-sass');
 var minifycss  = require('gulp-minify-css');
 var livereload = require('gulp-livereload');
+var connect = require('gulp-connect');
 
 var paths = {
     scripts: [
@@ -74,6 +75,18 @@ gulp.task('livereload-listen', function() {
     livereload.listen();
     gulp.watch(['css/dist/**', 'js/dist/**', '*.html'])
         .on('change', livereload.changed);
+});
+
+gulp.task('livereload-localserver', function() {
+    livereload.listen();
+    gulp.watch(['css/dist/**', 'js/dist/**', '*.html'])
+        .on('change', livereload.changed);
+
+    connect.server();
+});
+
+gulp.task('connect', function() {
+    connect.server();
 });
 
 // Default Task
